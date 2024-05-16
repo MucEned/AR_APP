@@ -3,23 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
 public class ARPlacement : MonoBehaviour
 {
-    [SerializeField] private GameObject sampleObject;
+    [SerializeField] private ModelContainer sampleObject;
     [SerializeField] private Transform placementIndicator;
+    [SerializeField] private Slider scaleSlider;
+    [SerializeField] private float rotationSpeed = 40f;
 
     private Pose placementPose;
     private ARRaycastManager aRRaycastManager;
     private bool placementPoseIsValid = false;
 
-    private GameObject spawnedObject;
+    private ModelContainer spawnedObject;
 
-    [SerializeField] private Material[] materials;
     private MeshRenderer objMeshRenderer;
-    private int materialIndex = 0; 
+    private int materialIndex = 0;
+
+    private int rotationDir = 0;
 
     void Start()
     {
@@ -27,13 +31,14 @@ public class ARPlacement : MonoBehaviour
     }
     void Update()
     { 
-        // if (sampleObject != null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        // if (Input.GetKeyDown(KeyCode.Space))
         // {
-        //     PlaceObject();
+        //     spawnedObject = Instantiate(sampleObject, Vector3.zero, Quaternion.identity);
         // }
+        CheckRotate();
+        // return;
         UpdatePlacementPose();
         UpdatePlacementIndicator();
-        CheckRotate();
     }
 
     private void UpdatePlacementPose()
@@ -62,57 +67,61 @@ public class ARPlacement : MonoBehaviour
         }
     }
 
-    // private void PlaceObject()
-    // {
-    //     if (spawnedObject == null)
-    //     {
-    //         spawnedObject = Instantiate(sampleObject, placementPose.position, placementPose.rotation);
-    //         spawnedObject.transform.DOPunchScale(Vector3.one * 1.1f, 0.2f, 2); 
-    //     }
-    // }
-
+    private Tweener animationTween;
     public void OnSpawnBtnDown()
     {
         if (spawnedObject == null)
         {
             spawnedObject = Instantiate(sampleObject, placementPose.position, placementPose.rotation);
-            objMeshRenderer =  spawnedObject.GetComponentInChildren<MeshRenderer>();
         }
         else
         {
             spawnedObject.transform.position = placementPose.position;
             spawnedObject.transform.rotation = placementPose.rotation;
         }
-        spawnedObject.transform.DOPunchScale(Vector3.one * 1.1f, 0.2f, 2); 
+
+        if (animationTween != null)
+        {
+            animationTween.Kill();
+            spawnedObject.transform.localScale = currentScale * Vector3.one;
+        }
+        animationTween = spawnedObject.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f, 2); 
     }
-    public void OnRotateBtnDown()
+
+    public void OnRotateBtnDown(int dir)
     {
         if (spawnedObject == null) return;
+        rotationDir = dir;
         isRotating = true;
     }
+
     public void OnRotateBtnUp()
     {
         if (spawnedObject == null) return;
         isRotating = false;
     }
+
     bool isRotating = false;
+    float currentScale = 1;
     private void CheckRotate()
     {
         if (spawnedObject == null) return;
+        if (rotationDir == 0) return;
         if (isRotating)
-        spawnedObject.transform.Rotate(Vector3.up * 20f * Time.deltaTime);
+        spawnedObject.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime * rotationDir);
     }
-    public void OnScaleBtnDown()
+
+    public void OnScaleBSliderValueChange()
     {
         if (spawnedObject == null) return;
-        spawnedObject.transform.localScale *= 1.05f;
+        currentScale = scaleSlider.value;
+        spawnedObject.transform.localScale = Vector3.one * currentScale;
+        spawnedObject.SaveScale(currentScale);
     }
+
     public void OnChangeBtnDown()
     {
         if (spawnedObject == null) return;
-        if (materialIndex >= (materials.Length))
-            materialIndex = 0;
-        objMeshRenderer.material = materials[materialIndex++];
-        // spawnedObject.
+        spawnedObject.Swap();
     }
 }
