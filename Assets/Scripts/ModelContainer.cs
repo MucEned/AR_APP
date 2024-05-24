@@ -25,4 +25,19 @@ public class ModelContainer : MonoBehaviour
     {
         this.scale = scale;
     }
+
+    public void OnActive()
+    {
+        heart.gameObject.SetActive(true);
+        lung.gameObject.SetActive(true);
+    }
+
+    public void ToggleLung()
+    {
+        lung.gameObject.SetActive(!lung.activeSelf);
+    }
+    public void ToggleHeart()
+    {
+        heart.gameObject.SetActive(!heart.activeSelf);
+    }
 }

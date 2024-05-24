@@ -34,6 +34,7 @@ public class ARPlacement : MonoBehaviour
         // if (Input.GetKeyDown(KeyCode.Space))
         // {
         //     spawnedObject = Instantiate(sampleObject, Vector3.zero, Quaternion.identity);
+        //     spawnedObject.OnActive();
         // }
         CheckRotate();
         // return;
@@ -43,6 +44,8 @@ public class ARPlacement : MonoBehaviour
 
     private void UpdatePlacementPose()
     {
+        if (Camera.current == null)
+            return;
         var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
         var hits = new List<ARRaycastHit>();
         aRRaycastManager.Raycast(screenCenter, hits, TrackableType.Planes);
@@ -86,6 +89,7 @@ public class ARPlacement : MonoBehaviour
             spawnedObject.transform.localScale = currentScale * Vector3.one;
         }
         animationTween = spawnedObject.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f, 2); 
+        spawnedObject.OnActive();
     }
 
     public void OnRotateBtnDown(int dir)
@@ -119,9 +123,14 @@ public class ARPlacement : MonoBehaviour
         spawnedObject.SaveScale(currentScale);
     }
 
-    public void OnChangeBtnDown()
+    public void OnLungButtonDown()
     {
         if (spawnedObject == null) return;
-        spawnedObject.Swap();
+        spawnedObject.ToggleLung();
+    }
+    public void OnHeartButtonDown()
+    {
+        if (spawnedObject == null) return;
+        spawnedObject.ToggleHeart();
     }
 }
