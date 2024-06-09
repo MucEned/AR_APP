@@ -8,6 +8,7 @@ namespace FF_ArApp
     public class LayerInformation : MonoBehaviour
     {
         public LayerInforData Data;
+        public GameObject LayerDisplay;
         private MainAppUIController uIController;
         private void OnTap()
         {
@@ -19,6 +20,10 @@ namespace FF_ArApp
         private void ShowInformation()
         {
             this.uIController.ShowLayerInformation(Data);
+        }
+        public void SetToggleLayerDisplay(bool isActive)
+        {
+            this.LayerDisplay.SetActive(isActive);
         }
     }
     [Serializable]

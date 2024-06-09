@@ -6,20 +6,21 @@ namespace FF_ArApp
 {
     public class MainModel : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> layers;
+        [SerializeField] private List<LayerInformation> layers;
         public void SetLayersDisplay(bool isActive)
         {
-            foreach (GameObject layer in layers)
+            foreach (LayerInformation layer in layers)
             {
-                layer.SetActive(isActive);
+                layer.SetToggleLayerDisplay(isActive);
             }
         }
         public void SetLayerDisplay(int layerIndex, bool isActive)
+        
         {
             if (layerIndex >= layers.Count)
                 return;
             
-            layers[layerIndex].SetActive(isActive);
+            layers[layerIndex].SetToggleLayerDisplay(isActive);
         }
     }   
 }
