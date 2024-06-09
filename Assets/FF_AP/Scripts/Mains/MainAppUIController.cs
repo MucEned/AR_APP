@@ -1,5 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 namespace FF_ArApp
 {
@@ -7,14 +8,40 @@ namespace FF_ArApp
     {
         [SerializeField] private MainAppController appController;
         [SerializeField] private Slider scaleSlider;
+
+        //Header
+        [SerializeField] private TMP_Text pageTitle;
+        [SerializeField] private CanvasGroup leftPageBtnImg;
+        [SerializeField] private CanvasGroup rightPageBtnImg;
+        //Container - Layer infor
+        [SerializeField] private GameObject layerInfoContainer;
+        [SerializeField] private TMP_Text layerName;
+        [SerializeField] private TMP_Text layerInformation;
+        //Container - Layers toggle
+        [SerializeField] private GameObject layersToggleContainer;
+
+        private void Start()
+        {
+            MainEvents.OnLayerTap += ShowLayerInformation;
+        }
+        private void OnDestroy()
+        {
+            MainEvents.OnLayerTap -= ShowLayerInformation;
+        }
         public void UpdateUIInformation(PageData pageData)
         {
-
+            this.pageTitle.text = pageData.PageTitle;
         }
         public void ShowLayerInformation(LayerInforData data)
         {
+            Debug.Log("Ha?");
             if (data == null)
                 return;
+
+            this.layerInfoContainer.SetActive(true);
+            this.layersToggleContainer.SetActive(false);
+            this.layerName.text = data.LayerName;
+            this.layerInformation.text = data.LayerDescription;
         }
     
         public void OnScaleSliderValueChange()
@@ -23,24 +50,55 @@ namespace FF_ArApp
             this.appController?.OnScaleSliderChange(currentScale);
         }
 
+        public void OnPageChangeBtnClick(int turnPageDir)
+        {
+            bool isStart = false;
+            bool isEnd = false;
+            this.appController?.TurnPage(turnPageDir, out isStart, out isEnd);
+            SetTurnPageDisplay(isStart, isEnd);
+            
+        }
+        
+        private void SetTurnPageDisplay(bool isStart, bool isEnd)
+        {
+            SetToggleBtn(this.leftPageBtnImg, isStart == false);
+            SetToggleBtn(this.rightPageBtnImg, isEnd == false);
+        }
+
+        private void SetToggleBtn(CanvasGroup btnImg, bool isToggle)
+        {
+            btnImg.alpha = isToggle ? 1f : 0.1f;
+        }
+
         public void OnRotationBtnClick(int rotateDir)
         {
-
+            this.appController?.SetRotateDir(rotateDir);
         }
 
         public void OnPlaceBtnClick()
         {
-
+            this.appController?.PlaceModel();
         }
 
         public void OnInformationWindowCloseBtnClick()
         {
-
+            this.layerInfoContainer.SetActive(false);
         }
 
-        public void OnLayerContainerCloseBtnClick()
+        public void ToggleLayerContainerCloseBtnClick()
         {
-            
+            if (this.appController.IsUsingModel)
+            {
+                bool toggle = !this.layersToggleContainer.activeSelf;
+                this.layersToggleContainer.SetActive(toggle);
+                if (toggle)
+                    this.layerInfoContainer.SetActive(false);
+            }
+        }
+        public void ResetUI()
+        {
+            this.layersToggleContainer.SetActive(false);
+            this.layerInfoContainer.SetActive(false);
         }
     }
 }

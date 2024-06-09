@@ -3,6 +3,8 @@ using UnityEngine.XR.ARSubsystems;
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 
 namespace FF_ArApp
 {
@@ -14,10 +16,13 @@ namespace FF_ArApp
         [SerializeField] private float rotationSpeed = 40f;
         [SerializeField] private MainModel sampleModel;
         [SerializeField] private Transform placementIndicator;
+        [SerializeField] private bool editorMode = true;
+
+        public bool IsUsingModel => this.mainModel != null && this.mainModel.gameObject != null;
 
 
         private int currentPageIndex = 0;
-        private MainModel currentModel;
+        private MainModel mainModel;
         private PageData currentPage;
         private List<ARRaycastHit> hits;
         private Camera mainCam;
@@ -29,17 +34,19 @@ namespace FF_ArApp
 
 
 
-
-        private MainModel mainModel;
         private int rotationDir = 0;
         bool isRotating = false;
         float currentScale = 1;
+
+        private Tweener animationTween;
 
 
 
         private void Start()
         {
             this.mainCam = Camera.main;
+            this.currentPageIndex = 0;
+            ChangePageByIndex(this.currentPageIndex);
         }
 
         private void Update()
@@ -80,7 +87,7 @@ namespace FF_ArApp
             if (mainModel == null) return;
             if (rotationDir == 0) return;
             if (isRotating)
-            mainModel.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime * rotationDir);
+                mainModel.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime * rotationDir);
         }
         private void UpdatePlacementPose()
         {
@@ -113,18 +120,30 @@ namespace FF_ArApp
         private void CheckoutItemInfo(GameObject item)
         {
             Debug.Log(item.name);
-            item.transform.DOPunchScale(Vector3.one * 1.1f, 0.25f);
+            item.transform.DOPunchScale(Vector3.one * 0.1f, 0.25f);
+
+            LayerInformation layerInfo = item.GetComponentInParent<LayerInformation>();
+            if (layerInfo != null)
+            {
+                MainEvents.OnLayerTap?.Invoke(layerInfo.Data);
+            }
         }
 
-        public void TurnPage(int turnDir) //1 is next, -1 is back
+        public void TurnPage(int turnDir, out bool isStart, out bool isEnd) //1 is next, -1 is back
         {
             int nextPageIndex = this.currentPageIndex + turnDir;
-            ChangePageByIndex(nextPageIndex);
+            isStart = (nextPageIndex <= 0);
+            isEnd = nextPageIndex >= (pagesConfig.GetNumberOfPage() - 1);
+            if (nextPageIndex < pagesConfig.GetNumberOfPage() && nextPageIndex >= 0)
+            {
+                ChangePageByIndex(nextPageIndex);
+            }
         }
-        private void ChangePageByIndex(int pageIndex)
+        private void ChangePageByIndex(int nextPageIndex)
         {
-            this.currentPageIndex = pageIndex;
-            this.currentPage = this.pagesConfig.GetPageDataByPageIndex(this.currentPageIndex);
+            PageData nextPage = this.pagesConfig.GetPageDataByPageIndex(nextPageIndex);
+            this.currentPageIndex = nextPage == null ? this.currentPageIndex : nextPageIndex;
+            this.currentPage = nextPage == null ? this.currentPage : nextPage;
             OnPageUpdate();
         }
         private void OnPageUpdate()
@@ -134,7 +153,9 @@ namespace FF_ArApp
         }
         private void RemoveModel()
         {
-            Destroy(this.currentModel);
+            if (this.mainModel == null || this.mainModel.gameObject == null)
+                return;
+            Destroy(this.mainModel.gameObject);
         }
         private void UpdateUIInformation()
         {
@@ -145,6 +166,48 @@ namespace FF_ArApp
             if (mainModel == null) return;
             mainModel.transform.localScale = Vector3.one * currentScale;
             mainModel.SetScale(currentScale);
+        }
+
+
+
+        //Commands
+        public void SetRotateDir(int newRotateDir)
+        {
+            if (newRotateDir == 0)
+                isRotating = false;
+            else
+                isRotating = true;
+            this.rotationDir = newRotateDir;
+        }
+        public void PlaceModel()
+        {
+            if (mainModel == null)
+            {
+                if (editorMode == false)
+                    mainModel = Instantiate(sampleModel, Vector3.zero, Quaternion.identity);
+                else
+                    mainModel = Instantiate(sampleModel, placementPose.position, placementPose.rotation);
+            }
+            else
+            {
+                if (editorMode == false)
+                {
+                    mainModel.transform.position = placementPose.position;
+                    mainModel.transform.rotation = placementPose.rotation;
+                }
+                else
+                {
+                    mainModel.transform.position = Vector3.zero;
+                    mainModel.transform.rotation = Quaternion.identity;
+                }
+            }
+
+            if (animationTween != null)
+            {
+                animationTween.Kill();
+                mainModel.transform.localScale = currentScale * Vector3.one;
+            }
+            animationTween = mainModel.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f, 2);
         }
     }
 }

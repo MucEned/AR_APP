@@ -9,6 +9,10 @@ namespace FF_ArApp
     public class PagesConfig : ScriptableObject
     {
         public List<PageData> pageDatas;
+        public int GetNumberOfPage()
+        {
+            return pageDatas.Count;
+        }
         public PageData GetPageDataByPageIndex(int pageIndex)
         {
             if (pageIndex >= pageDatas.Count)
