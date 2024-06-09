@@ -7,6 +7,10 @@ namespace FF_ArApp
     public class MainModel : MonoBehaviour
     {
         [SerializeField] private List<LayerInformation> layers;
+        public void SetScale(float scale)
+        {
+
+        }
         public void SetLayersDisplay(bool isActive)
         {
             foreach (LayerInformation layer in layers)
