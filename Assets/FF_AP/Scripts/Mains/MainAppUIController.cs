@@ -19,6 +19,8 @@ namespace FF_ArApp
         [SerializeField] private TMP_Text layerInformation;
         //Container - Layers toggle
         [SerializeField] private GameObject layersToggleContainer;
+        [SerializeField] private UILayerToggle layerToggleSample;
+        [SerializeField] private Transform layersView;
 
         private void Start()
         {
@@ -27,6 +29,22 @@ namespace FF_ArApp
         private void OnDestroy()
         {
             MainEvents.OnLayerTap -= ShowLayerInformation;
+        }
+        public void OnMainModelSpawn(MainModel newMainModel)
+        {
+            CleanLayersView();
+            foreach (LayerInformation layer in newMainModel.Layers)
+            {
+                UILayerToggle newLayerToggle = Instantiate(layerToggleSample, layersView);
+                newLayerToggle.Setup(layer);
+            }
+        }
+        private void CleanLayersView()
+        {
+            foreach (Transform item in layersView)
+            {
+                Destroy(item.gameObject);
+            }
         }
         public void UpdateUIInformation(PageData pageData)
         {

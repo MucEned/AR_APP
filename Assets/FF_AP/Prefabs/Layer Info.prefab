@@ -85,7 +85,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 397892291852770833}
+        m_TargetAssemblyTypeName: FF_ArApp.UILayerToggle, Assembly-CSharp
+        m_MethodName: OnToggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &8819389660317699776
 GameObject:
@@ -173,6 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8819389660376508879}
   - component: {fileID: 8819389660376508877}
+  - component: {fileID: 397892291852770833}
   m_Layer: 5
   m_Name: Layer Info
   m_TagString: Untagged
@@ -209,6 +222,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8819389660376508864}
   m_CullTransparentMesh: 1
+--- !u!114 &397892291852770833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8819389660376508864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c22e52d73eb3edf44b426f34d9e54886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggle: {fileID: 8819389659962164581}
+  layerName: {fileID: 8819389660546181839}
 --- !u!1 &8819389660546181825
 GameObject:
   m_ObjectHideFlags: 0

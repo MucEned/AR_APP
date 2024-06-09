@@ -181,33 +181,38 @@ namespace FF_ArApp
         }
         public void PlaceModel()
         {
-            if (mainModel == null)
+            if (this.mainModel == null)
             {
                 if (editorMode == false)
-                    mainModel = Instantiate(sampleModel, Vector3.zero, Quaternion.identity);
+                    this.mainModel = Instantiate(sampleModel, Vector3.zero, Quaternion.identity);
                 else
-                    mainModel = Instantiate(sampleModel, placementPose.position, placementPose.rotation);
+                    this.mainModel = Instantiate(sampleModel, placementPose.position, placementPose.rotation);
             }
             else
             {
                 if (editorMode == false)
                 {
-                    mainModel.transform.position = placementPose.position;
-                    mainModel.transform.rotation = placementPose.rotation;
+                    this.mainModel.transform.position = placementPose.position;
+                    this.mainModel.transform.rotation = placementPose.rotation;
                 }
                 else
                 {
-                    mainModel.transform.position = Vector3.zero;
-                    mainModel.transform.rotation = Quaternion.identity;
+                    this.mainModel.transform.position = Vector3.zero;
+                    this.mainModel.transform.rotation = Quaternion.identity;
                 }
             }
 
             if (animationTween != null)
             {
                 animationTween.Kill();
-                mainModel.transform.localScale = currentScale * Vector3.one;
+                this.mainModel.transform.localScale = currentScale * Vector3.one;
             }
-            animationTween = mainModel.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f, 2);
+            animationTween = this.mainModel.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f, 2);
+
+            this.mainModel.SetLayersDisplay(true);
+
+            if (this.mainModel != null)
+                this.uiController.OnMainModelSpawn(this.mainModel);
         }
     }
 }

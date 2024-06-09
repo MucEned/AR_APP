@@ -6,14 +6,14 @@ namespace FF_ArApp
 {
     public class MainModel : MonoBehaviour
     {
-        [SerializeField] private List<LayerInformation> layers;
+        public List<LayerInformation> Layers;
         public void SetScale(float scale)
         {
 
         }
         public void SetLayersDisplay(bool isActive)
         {
-            foreach (LayerInformation layer in layers)
+            foreach (LayerInformation layer in Layers)
             {
                 layer.SetToggleLayerDisplay(isActive);
             }
@@ -21,10 +21,10 @@ namespace FF_ArApp
         public void SetLayerDisplay(int layerIndex, bool isActive)
         
         {
-            if (layerIndex >= layers.Count)
+            if (layerIndex >= Layers.Count)
                 return;
             
-            layers[layerIndex].SetToggleLayerDisplay(isActive);
+            Layers[layerIndex].SetToggleLayerDisplay(isActive);
         }
     }   
 }
