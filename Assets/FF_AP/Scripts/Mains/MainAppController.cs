@@ -181,6 +181,10 @@ namespace FF_ArApp
         }
         public void PlaceModel()
         {
+            this.sampleModel = this.currentPage.MainModel;
+            if (sampleModel == null)
+                return;
+                
             if (this.mainModel == null)
             {
                 if (editorMode == false)
