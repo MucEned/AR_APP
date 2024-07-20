@@ -22,6 +22,8 @@ namespace FF_ArApp
         [SerializeField] private UILayerToggle layerToggleSample;
         [SerializeField] private Transform layersView;
 
+        public bool IsCheckingLayer => this.layersToggleContainer.activeSelf;
+
         private void Start()
         {
             MainEvents.OnLayerTap += ShowLayerInformation;
@@ -117,6 +119,10 @@ namespace FF_ArApp
         {
             this.layersToggleContainer.SetActive(false);
             this.layerInfoContainer.SetActive(false);
+        }
+        public void ToggleCrosshair(bool toggle)
+        {
+            this.appController.ToggleCrosshair(toggle);
         }
     }
 }

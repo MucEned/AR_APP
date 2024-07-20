@@ -16,6 +16,7 @@ namespace FF_ArApp
         [SerializeField] private float rotationSpeed = 40f;
         [SerializeField] private MainModel sampleModel;
         [SerializeField] private Transform placementIndicator;
+        [SerializeField] private GameObject crosshair;
         [SerializeField] private bool editorMode = true;
 
         public bool IsUsingModel => this.mainModel != null && this.mainModel.gameObject != null;
@@ -117,10 +118,16 @@ namespace FF_ArApp
             }
         }
 
+        Tweener animTween;
         private void CheckoutItemInfo(GameObject item)
         {
+            if (uiController.IsCheckingLayer)
+                return;
             Debug.Log(item.name);
-            item.transform.DOPunchScale(Vector3.one * 0.1f, 0.25f);
+            if (animTween != null) 
+                animTween.Kill();
+            item.transform.localScale = Vector3.one;
+            // animTween = item.transform.DOPunchScale(Vector3.one * 0.1f, 0.25f);
 
             LayerInformation layerInfo = item.GetComponentInParent<LayerInformation>();
             if (layerInfo != null)
@@ -179,6 +186,12 @@ namespace FF_ArApp
                 isRotating = true;
             this.rotationDir = newRotateDir;
         }
+        public void ToggleCrosshair(bool toggle)
+        {
+            if (this.crosshair.activeSelf == toggle)
+                return;
+            this.crosshair.SetActive(toggle);
+        }
         public void PlaceModel()
         {
             this.sampleModel = this.currentPage.MainModel;
@@ -188,9 +201,9 @@ namespace FF_ArApp
             if (this.mainModel == null)
             {
                 if (editorMode == false)
-                    this.mainModel = Instantiate(sampleModel, Vector3.zero, Quaternion.identity);
-                else
                     this.mainModel = Instantiate(sampleModel, placementPose.position, placementPose.rotation);
+                else
+                    this.mainModel = Instantiate(sampleModel, Vector3.zero, Quaternion.identity);
             }
             else
             {

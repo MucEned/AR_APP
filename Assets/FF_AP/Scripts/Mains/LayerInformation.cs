@@ -9,10 +9,13 @@ namespace FF_ArApp
     {
         public LayerInforData Data;
         public GameObject LayerDisplay;
+        [SerializeField] private bool isGeneralLayer = false;
         private MainAppUIController uIController;
         private void OnTap()
         {
             if (Data == null)
+                return;
+            if (this.isGeneralLayer)
                 return;
                 
             ShowInformation();
