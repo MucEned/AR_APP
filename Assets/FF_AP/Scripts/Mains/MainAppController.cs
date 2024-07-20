@@ -126,7 +126,7 @@ namespace FF_ArApp
             Debug.Log(item.name);
             if (animTween != null) 
                 animTween.Kill();
-            item.transform.localScale = Vector3.one;
+            // item.transform.localScale = Vector3.one;
             // animTween = item.transform.DOPunchScale(Vector3.one * 0.1f, 0.25f);
 
             LayerInformation layerInfo = item.GetComponentInParent<LayerInformation>();
@@ -222,7 +222,7 @@ namespace FF_ArApp
             if (animationTween != null)
             {
                 animationTween.Kill();
-                this.mainModel.transform.localScale = currentScale * Vector3.one;
+                // this.mainModel.transform.localScale = currentScale * Vector3.one;
             }
             animationTween = this.mainModel.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f, 2);
 
