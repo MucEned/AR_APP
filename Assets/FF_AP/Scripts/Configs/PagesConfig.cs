@@ -37,5 +37,6 @@ namespace FF_ArApp
         public string PageTitle;
         public string PagContent;
         public MainModel MainModel;
+        public bool IsAllowLayers;
     }
 }

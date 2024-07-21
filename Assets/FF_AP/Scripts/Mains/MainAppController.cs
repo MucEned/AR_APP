@@ -151,12 +151,14 @@ namespace FF_ArApp
             PageData nextPage = this.pagesConfig.GetPageDataByPageIndex(nextPageIndex);
             this.currentPageIndex = nextPage == null ? this.currentPageIndex : nextPageIndex;
             this.currentPage = nextPage == null ? this.currentPage : nextPage;
-            OnPageUpdate();
+            bool isAllowLayers = nextPage.IsAllowLayers;
+            OnPageUpdate(isAllowLayers);
         }
-        private void OnPageUpdate()
+        private void OnPageUpdate(bool isAllowLayers)
         {
             RemoveModel();
             UpdateUIInformation();
+            ToggleLayerButton(isAllowLayers);
         }
         private void RemoveModel()
         {
@@ -167,6 +169,10 @@ namespace FF_ArApp
         private void UpdateUIInformation()
         {
             this.uiController.UpdateUIInformation(this.currentPage);
+        }
+        private void ToggleLayerButton(bool toggle)
+        {
+            this.uiController.ToggleLayerButton(toggle);
         }
         public void OnScaleSliderChange(float currentScale)
         {

@@ -616,11 +616,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data:
-    LayerName: Venas
-    LayerDescription: Donec ac justo sagittis felis mattis elementum. Suspendisse
-      vitae congue massa. In rutrum ultrices dui in sollicitudin. Integer finibus
-      at dui nec vehicula. Nullam nec quam aliquam, tincidunt velit sit amet, pharetra
-      libero. Nunc facilisis ut lectus at imperdiet.
+    LayerName: Veins
+    LayerDescription: Return CO2-rich blood from the body to the heart for oxygenation
+      and nutrient replenishment.
   LayerDisplay: {fileID: 8541261162002112365}
   isGeneralLayer: 0
 --- !u!1 &3053577559192539187
@@ -670,9 +668,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Hands
-    LayerDescription: Maecenas venenatis turpis vel rhoncus cursus. Aenean at est
-      rutrum, porttitor erat a, tincidunt magna. Curabitur sed neque rhoncus, sodales
-      enim quis, dapibus lacus. Ut commodo nisi accumsan metus sagittis accumsan.
+    LayerDescription: Enable grasping, manipulating objects, fine motor skills, and
+      tactile sensation, essential for daily activities and communication.
   LayerDisplay: {fileID: 7429727753835496705}
   isGeneralLayer: 0
 --- !u!1 &3053577559246986661
@@ -721,10 +718,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Layers:
-  - {fileID: 3053577560844447847}
-  - {fileID: 3053577559642450256}
   - {fileID: 3053577559318409501}
   - {fileID: 3053577559331225276}
+  - {fileID: 3053577560844447847}
+  - {fileID: 3053577559642450256}
 --- !u!1 &3053577559318409571
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,9 +769,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Skin
-    LayerDescription: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-      porta finibus ligula, ut suscipit risus rutrum eu. In vulputate sollicitudin
-      nibh at fermentum. Nulla id vulputate eros, eu sollicitudin magna.
+    LayerDescription: Protection against microorganisms, dehydration, ultraviolet
+      light, and mechanical damage.
   LayerDisplay: {fileID: 3053577560802540869}
   isGeneralLayer: 0
 --- !u!1 &3053577559331130146
@@ -824,10 +820,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Liver
-    LayerDescription: Vestibulum non luctus dolor, ac dictum nunc. Curabitur feugiat
-      sem in sodales rhoncus. Vestibulum ac bibendum mi. Quisque quam est, lacinia
-      vitae purus a, condimentum gravida libero. Curabitur ac lacus sit amet magna
-      hendrerit porta vitae convallis nunc.
+    LayerDescription: Detoxifies chemicals, metabolizes nutrients, produces bile
+      for digestion, and stores energy in the form of glycogen.
   LayerDisplay: {fileID: 6411871626506458088}
   isGeneralLayer: 0
 --- !u!1 &3053577559331225218
@@ -877,13 +871,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Muscle
-    LayerDescription: Nullam sed lacinia lacus. Curabitur viverra rhoncus bibendum.
-      Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-      mus. In tellus sapien, dignissim eu porttitor vel, fermentum et erat. Cras
-      id ipsum id sapien imperdiet congue. Donec dapibus accumsan rutrum. Nunc nec
-      elit arcu. Duis pellentesque est leo, in suscipit leo faucibus eget. Class
-      aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-      himenaeos.
+    LayerDescription: Facilitate movement, support posture, generate heat, and aid
+      in circulation and body stability.
   LayerDisplay: {fileID: 3053577560558679277}
   isGeneralLayer: 0
 --- !u!1 &3053577559632736315
@@ -971,10 +960,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Organs
-    LayerDescription: Morbi in libero nec ligula vehicula posuere sit amet id augue.
-      Maecenas vel lacus sed leo blandit tempus at in sapien. Suspendisse aliquam
-      nibh a velit tincidunt, vel egestas tellus lacinia. Integer commodo pretium
-      erat, quis bibendum eros porta at.
+    LayerDescription: Perform specialized functions within the body, such as digestion,
+      respiration, filtration, and hormone production, ensuring physiological balance.
   LayerDisplay: {fileID: 3053577559632736315}
   isGeneralLayer: 1
 --- !u!1 &3053577559789250249
@@ -1024,9 +1011,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Legs
-    LayerDescription: Etiam at enim in lorem blandit congue interdum sit amet tortor.
-      Integer vulputate quis ex quis fringilla. Aliquam auctor libero in finibus
-      sollicitudin.
+    LayerDescription: 'Support body weight, facilitate movement, protect internal
+      organs, and store minerals like calcium and phosphorus.    '
   LayerDisplay: {fileID: 8771122363307528610}
   isGeneralLayer: 0
 --- !u!1 &3053577559830056931
@@ -1076,9 +1062,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Diafragma
-    LayerDescription: Phasellus bibendum purus metus, eget pellentesque eros pellentesque
-      vitae. Vestibulum feugiat commodo nisi non viverra. Phasellus eleifend posuere
-      erat in auctor.
+    LayerDescription: 'Separates the thoracic and abdominal cavities, aiding in breathing
+      by contracting and relaxing to facilitate lung expansion and contraction.    '
   LayerDisplay: {fileID: 795216130315191578}
   isGeneralLayer: 0
 --- !u!1 &3053577559988572100
@@ -1128,8 +1113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Digestive
-    LayerDescription: 'Phasellus condimentum leo nec odio ultrices, fringilla egestas
-      diam volutpat. Morbi laoreet tempor ante non congue. '
+    LayerDescription: Processes food, absorbs nutrients, and eliminates waste to
+      sustain the body's energy and function.
   LayerDisplay: {fileID: 5144916795147745653}
   isGeneralLayer: 0
 --- !u!1 &3053577560008525662
@@ -1179,9 +1164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Heart
-    LayerDescription: Mauris mollis ut massa eget rutrum. Vestibulum ante ipsum primis
-      in faucibus orci luctus et ultrices posuere cubilia curae; Mauris blandit nulla
-      massa, tempus lacinia magna blandit nec.
+    LayerDescription: Pumps oxygenated blood throughout the body, supplying tissues
+      with nutrients and removing waste products.
   LayerDisplay: {fileID: 3023434972611140454}
   isGeneralLayer: 0
 --- !u!1 &3053577560337995410
@@ -1231,10 +1215,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Skull
-    LayerDescription: Duis fringilla ac risus a posuere. Maecenas metus elit, tincidunt
-      sed urna a, vehicula semper neque. Suspendisse potenti. Sed elementum ultrices
-      turpis vulputate ultrices. Proin vehicula, nisi quis elementum varius, nisi
-      nulla congue turpis, blandit ultrices odio justo sit amet est.
+    LayerDescription: Protects the brain, supports sensory organs (eyes, ears), and
+      provides structure for facial features.
   LayerDisplay: {fileID: 3906175223789496628}
   isGeneralLayer: 0
 --- !u!1 &3053577560441374109
@@ -1284,9 +1266,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Pelvis
-    LayerDescription: Maecenas eu arcu ut nulla suscipit tempus et vel sapien. Sed
-      quis leo sodales, fermentum leo eu, sagittis ligula. Ut ornare dolor mi, ut
-      molestie massa laoreet in.
+    LayerDescription: Support the spine, protect internal organs, and facilitate
+      movement of the lower limbs.
   LayerDisplay: {fileID: 4434950171189000897}
   isGeneralLayer: 0
 --- !u!1 &3053577560558679277
@@ -1372,9 +1353,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Gallbladder
-    LayerDescription: Phasellus lacinia scelerisque sapien, eget elementum libero
-      blandit id. Vestibulum ante magna, faucibus sed dui nec, dictum mattis turpis.
-      Proin aliquet mauris vitae odio tincidunt aliquet.
+    LayerDescription: 'Stores and concentrates bile produced by the liver, aiding
+      in fat digestion and absorption in the small intestine.    '
   LayerDisplay: {fileID: 343410231898193297}
   isGeneralLayer: 0
 --- !u!1 &3053577560609366156
@@ -1424,9 +1404,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Lungs
-    LayerDescription: Nullam enim felis, placerat eget placerat id, sagittis vel
-      purus. Donec ultrices dui justo, ut euismod nisi suscipit vitae. Morbi consequat
-      quam vel sapien venenatis, a dapibus sem vulputate.
+    LayerDescription: Oxygenate blood, remove carbon dioxide, support immune function,
+      and facilitate vocalization.
   LayerDisplay: {fileID: 6804264498430695224}
   isGeneralLayer: 0
 --- !u!1 &3053577560715669344
@@ -1476,8 +1455,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Spine
-    LayerDescription: Quisque nec tellus eget risus volutpat lobortis. Nulla congue
-      vitae ligula in faucibus.
+    LayerDescription: Supports the body's weight, protects the spinal cord, allows
+      movement, and maintains posture.
   LayerDisplay: {fileID: 4896666101915894113}
   isGeneralLayer: 0
 --- !u!1 &3053577560765677824
@@ -1527,9 +1506,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Robcage
-    LayerDescription: Pellentesque at nunc interdum, efficitur justo id, congue ligula.
-      Nulla ut tempus eros. Sed volutpat dui vel arcu interdum viverra. Sed a ligula
-      massa.
+    LayerDescription: Protects the heart, lungs, and other vital organs while supporting
+      breathing and movement.
   LayerDisplay: {fileID: 4088941908664102102}
   isGeneralLayer: 0
 --- !u!1 &3053577560784228663
@@ -1579,8 +1557,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Urinary
-    LayerDescription: Pellentesque habitant morbi tristique senectus et netus et
-      malesuada fames ac turpis egestas.
+    LayerDescription: Filters blood, removes waste products, regulates electrolytes,
+      and maintains fluid balance in the body.
   LayerDisplay: {fileID: 5652907494488693272}
   isGeneralLayer: 0
 --- !u!1 &3053577560802540869
@@ -1664,10 +1642,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data:
-    LayerName: Arterias
-    LayerDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-      rutrum pharetra erat. Quisque a dui elit. Quisque auctor felis sed ante tristique,
-      id hendrerit magna elementum. '
+    LayerName: Arteries
+    LayerDescription: Transport oxygen-rich blood from the heart to body tissues
+      and organs for cellular function.
   LayerDisplay: {fileID: 4285787467284291029}
   isGeneralLayer: 0
 --- !u!1 &3053577560844447845
@@ -1717,10 +1694,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     LayerName: Skeleton
-    LayerDescription: Pellentesque laoreet ullamcorper lorem ut scelerisque. Sed
-      eleifend justo pretium enim pellentesque ullamcorper. Pellentesque at quam
-      massa. In maximus ullamcorper orci ac porttitor. Aenean sagittis est nec vehicula
-      gravida. Cras ut odio quam. In faucibus accumsan magna eget vestibulum.
+    LayerDescription: Provides structural support, protects organs, facilitates movement,
+      stores minerals, and produces blood cells.
   LayerDisplay: {fileID: 3053577558963783347}
   isGeneralLayer: 1
 --- !u!1 &3906175223789496628

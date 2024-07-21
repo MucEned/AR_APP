@@ -18,6 +18,7 @@ namespace FF_ArApp
         [SerializeField] private TMP_Text layerName;
         [SerializeField] private TMP_Text layerInformation;
         //Container - Layers toggle
+        [SerializeField] private GameObject layersContainer;
         [SerializeField] private GameObject layersToggleContainer;
         [SerializeField] private UILayerToggle layerToggleSample;
         [SerializeField] private Transform layersView;
@@ -76,7 +77,7 @@ namespace FF_ArApp
             bool isEnd = false;
             this.appController?.TurnPage(turnPageDir, out isStart, out isEnd);
             SetTurnPageDisplay(isStart, isEnd);
-            
+            ResetUI();
         }
         
         private void SetTurnPageDisplay(bool isStart, bool isEnd)
@@ -123,6 +124,10 @@ namespace FF_ArApp
         public void ToggleCrosshair(bool toggle)
         {
             this.appController.ToggleCrosshair(toggle);
+        }
+        public void ToggleLayerButton(bool toggle)
+        {
+            this.layersContainer.SetActive(toggle);
         }
     }
 }
